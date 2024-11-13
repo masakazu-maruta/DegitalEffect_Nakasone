@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap');
+
+:host{
+    display: grid;
+    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-rows:2fr 3fr 2fr;
+    grid-template-areas:
+        "wearing arrow-upRight bee"
+        "arrow-leftUp logo arrow-rightDown" 
+        "create arrow-downLeft recycle";
+}
+
+.logo {
+    grid-area: logo;
+}
+
+.logo img{
+    max-width: 100%;
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+
+.icon{
+    display: flex;
+    flex-direction: column;
+    justify-content:start;
+    row-gap: 8%;
+    align-items: center;
+    overflow: hidden;
+    &.--wearing {
+        grid-area: wearing;
+    }
+    &.--bee {
+        grid-area: bee;
+    }
+    &.--create {
+        grid-area: create;
+    }
+    &.--recycle {
+        grid-area: recycle;
+    }
+    &.--create p{
+        order: 2;
+    }
+    &.--recycle p{
+        order: 2;
+    }
+    &.--create picture{
+        order: 1;
+    }
+    &.--recycle picture{
+        order: 1;
+    }
+}
+.icon p{
+    font-family: "Amiko", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 160%;
+    letter-spacing: .14em;
+    margin: 0;
+    text-wrap: nowrap;
+}
+.icon picture{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 64%;
+    width: 100%;
+}
+.icon img{
+    max-width: 100%;
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+}
+
+.arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    &.--upRight {
+        grid-area: arrow-upRight;
+    }
+    &.--downLeft {
+        grid-area: arrow-downLeft;
+    }
+    &.--leftUp {
+        grid-area: arrow-leftUp;
+    }
+    &.--rightDown {
+        grid-area: arrow-rightDown;
+    }
+    &.--upRight img{
+        max-width: 90%;
+        height: 90%;
+        width: auto;
+        object-fit: contain;
+        object-position:  0% 8%;
+    }
+    &.--downLeft img{
+        max-width: 90%;
+        height: 90%;
+        width: auto;
+        object-fit: contain;
+        object-position: 0% 92%;
+    }
+    &.--leftUp img{
+        max-height: 90%;
+        width: 90%;
+        height: auto;
+        object-fit: contain;
+        object-position: 8% 0;
+    }
+    &.--rightDown img{
+        max-height: 90%;
+        width: 90%;
+        height: auto;
+        object-fit: contain;
+        object-position: 92% 0;
+    }
+}
+

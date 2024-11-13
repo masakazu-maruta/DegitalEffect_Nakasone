@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap");
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Amiko", sans-serif;
+}
+
+.topOp {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  animation: fadeOutOpening 1s ease 5.5s forwards;
+}
+.topOp .topOp__imgWearhouse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 540px;
+  will-change: transform;
+  animation: expandWearhouse 1s ease 1s forwards, reduceWearhouse 0.5s ease 2s forwards;
+  z-index: 20;
+}
+.topOp .topOp__imgFallClothes {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 320px;
+  will-change: transform top display;
+  animation: fallClothes 1s ease forwards;
+  z-index: 10;
+}
+.topOp .topOp__imgExpandClothes {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5000px;
+  transform: translate(-50%, -50%) scale(0);
+  will-change: transform;
+  animation: expandClothes 3s ease-out 2s forwards;
+  z-index: 30;
+}
+
+.topOpSvg {
+  width: 100%;
+  height: 100%;
+  background-color: #4a8a6f;
+}
+.topOpSvg .topOpSvg__background {
+  cx: 50;
+  cy: 50;
+}
+.topOpSvg .topOpSvg__background.--1 {
+  fill: #5d9178;
+  r: 60;
+}
+.topOpSvg .topOpSvg__background.--2 {
+  fill: #709b84;
+  r: 50;
+}
+.topOpSvg .topOpSvg__background.--3 {
+  fill: #7fa48d;
+  r: 40;
+}
+.topOpSvg .topOpSvg__background.--4 {
+  fill: #8bac97;
+  r: 30;
+}
+
+@keyframes fallClothes {
+  0% {
+    top: 0;
+    transform: translate(-50%, -100%);
+  }
+  100% {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+}
+@keyframes expandWearhouse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+@keyframes reduceWearhouse {
+  0% {
+    transform: translate(-50%, -50%) scale(2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@keyframes expandClothes {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@keyframes fadeOutOpening {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+.topMain {
+  opacity: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  animation: fadeInMain 1s ease 5.5s forwards;
+}
+.topMain .topMain__logo {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 680px;
+  height: 680px;
+}
+
+.topMainFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+
+.topMainFrameRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+  margin-right: 30px;
+  margin-top: 30px;
+}
+
+.topMainText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 58px);
+  height: calc(100% - 58px);
+  margin-left: 58px;
+  margin-bottom: 58px;
+}
+
+.topMain-background {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 80%;
+  height: 200%;
+  transform-origin: center center;
+  transform: translate(-50%, -50%) skew(-16deg) rotate(30deg);
+  z-index: -10;
+}
+
+@keyframes fadeInMain {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

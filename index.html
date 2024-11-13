@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiko&display=swap" rel="stylesheet">
+    <title>とっぷ</title>
+</head>
+
+<body>
+    <div class="topOp">
+        <svg class="topOpSvg" viewBox="0 0 100 100">
+            <circle class="topOpSvg__background --1" />
+            <circle class="topOpSvg__background --2" />
+            <circle class="topOpSvg__background --3" />
+            <circle class="topOpSvg__background --4" />
+        </svg>
+        <picture>
+            <source srcset="./assets/images/top/opening/wearhouse.webp" type="image/webp">
+            <source srcset="./assets/images/top/opening/wearhouse.png" type="image/png">
+            <img class="topOp__imgWearhouse" src="">
+        </picture>
+        <picture>
+            <source srcset="./assets/images/top/opening/fallClothes.webp" type="image/webp">
+            <source srcset="./assets/images/top/opening/fallClothes.png" type="image/png">
+            <img class="topOp__imgFallClothes" src="">
+        </picture>
+        <picture>
+            <source srcset="./assets/images/top/opening/expandClothes.webp" type="image/webp">
+            <source srcset="./assets/images/top/opening/expandClothes.png" type="image/png">
+            <img class="topOp__imgExpandClothes" src="">
+        </picture>
+    </div>
+    <div class="topMain">
+        <nakasone-background class="topMain-background"></nakasone-background>
+        <nakasone-logo class="topMain__logo"></nakasone-logo>
+        <nakasone-frame-border class="topMainFrame" id="js-mainFrameBorder"></nakasone-frame-border>
+        <nakasone-frame-border-right class="topMainFrameRight"
+            id="js-mainFrameBorderRight"></nakasone-frame-border-right>
+        <nakasone-frame-text class="topMainText" id="js-mainFrameText"></nakasone-frame-text>
+        <nakasone-frame-text-first class="topMainText" id="js-mainFrameTextFirst"></nakasone-frame-text-first>
+    </div>
+
+</body>
+<script src="./assets/js/main/main.js"></script>
+
+</html>
