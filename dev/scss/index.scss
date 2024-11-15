@@ -12,6 +12,7 @@ $openingTime: $fallClothesTime + $expandWearhouseTime + $reduceWearhouseTime + $
 $fadeInMainTime: 1s;
 html,
 body {
+  overflow: hidden;
   margin: 0;
   padding: 0;
   font-family: "Amiko", sans-serif;

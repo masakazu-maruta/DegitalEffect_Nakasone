@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap");
 html,
 body {
+  overflow: hidden;
   margin: 0;
   padding: 0;
   font-family: "Amiko", sans-serif;
@@ -10,7 +11,8 @@ body {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  animation: fadeOutOpening 1s ease 5.5s forwards;
+  -webkit-animation: fadeOutOpening 1s ease 5.5s forwards;
+          animation: fadeOutOpening 1s ease 5.5s forwards;
 }
 .topOp .topOp__imgWearhouse {
   position: absolute;
@@ -19,7 +21,8 @@ body {
   transform: translate(-50%, -50%);
   width: 540px;
   will-change: transform;
-  animation: expandWearhouse 1s ease 1s forwards, reduceWearhouse 0.5s ease 2s forwards;
+  -webkit-animation: expandWearhouse 1s ease 1s forwards, reduceWearhouse 0.5s ease 2s forwards;
+          animation: expandWearhouse 1s ease 1s forwards, reduceWearhouse 0.5s ease 2s forwards;
   z-index: 20;
 }
 .topOp .topOp__imgFallClothes {
@@ -29,7 +32,8 @@ body {
   transform: translate(-50%, -100%);
   width: 320px;
   will-change: transform top display;
-  animation: fallClothes 1s ease forwards;
+  -webkit-animation: fallClothes 1s ease forwards;
+          animation: fallClothes 1s ease forwards;
   z-index: 10;
 }
 .topOp .topOp__imgExpandClothes {
@@ -39,7 +43,8 @@ body {
   width: 5000px;
   transform: translate(-50%, -50%) scale(0);
   will-change: transform;
-  animation: expandClothes 3s ease-out 2s forwards;
+  -webkit-animation: expandClothes 3s ease-out 2s forwards;
+          animation: expandClothes 3s ease-out 2s forwards;
   z-index: 30;
 }
 
@@ -69,6 +74,18 @@ body {
   r: 30;
 }
 
+@-webkit-keyframes fallClothes {
+  0% {
+    top: 0;
+    transform: translate(-50%, -100%);
+  }
+  100% {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+}
+
 @keyframes fallClothes {
   0% {
     top: 0;
@@ -80,6 +97,14 @@ body {
     display: none;
   }
 }
+@-webkit-keyframes expandWearhouse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
 @keyframes expandWearhouse {
   0% {
     transform: translate(-50%, -50%) scale(1);
@@ -88,9 +113,25 @@ body {
     transform: translate(-50%, -50%) scale(2);
   }
 }
+@-webkit-keyframes reduceWearhouse {
+  0% {
+    transform: translate(-50%, -50%) scale(2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
 @keyframes reduceWearhouse {
   0% {
     transform: translate(-50%, -50%) scale(2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@-webkit-keyframes expandClothes {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
   }
   100% {
     transform: translate(-50%, -50%) scale(1);
@@ -102,6 +143,15 @@ body {
   }
   100% {
     transform: translate(-50%, -50%) scale(1);
+  }
+}
+@-webkit-keyframes fadeOutOpening {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
   }
 }
 @keyframes fadeOutOpening {
@@ -118,7 +168,8 @@ body {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  animation: fadeInMain 1s ease 5.5s forwards;
+  -webkit-animation: fadeInMain 1s ease 5.5s forwards;
+          animation: fadeInMain 1s ease 5.5s forwards;
 }
 .topMain .topMain__logo {
   position: relative;
@@ -168,6 +219,15 @@ body {
   transform-origin: center center;
   transform: translate(-50%, -50%) skew(-16deg) rotate(30deg);
   z-index: -10;
+}
+
+@-webkit-keyframes fadeInMain {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInMain {
