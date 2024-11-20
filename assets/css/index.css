@@ -238,3 +238,70 @@ body {
     opacity: 1;
   }
 }
+.topSection {
+  padding: 100px 180px;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  background-image: url("../images/top/category/wireBackground.png");
+  z-index: -100;
+}
+
+.topSectionCardContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.topSectionCard {
+  position: relative;
+  max-width: 350px;
+  max-height: 745px;
+  width: 16%;
+  height: calc(100% - 100px);
+  align-self: flex-end;
+  overflow: hidden;
+}
+.topSectionCard__image {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: 100%;
+}
+
+.topSectionCard:nth-child(even) {
+  align-self: flex-start;
+}
+
+.topSectionMessage {
+  position: absolute;
+  left: 0;
+  bottom: 24px;
+  background-color: rgba(147, 147, 147, 0.5019607843);
+}
+.topSectionMessage__text {
+  color: white;
+  font-size: 65px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin: 0;
+}
+.topSectionMessage__text.--large {
+  font-size: 100px;
+}
+.topSectionMessage.--large {
+  bottom: 140px;
+}
+.topSectionMessage ::after {
+  content: "";
+  position: absolute;
+  left: calc(100% + 20px);
+  width: 22px;
+  height: 100%;
+  background-color: rgba(147, 147, 147, 0.5019607843);
+}
