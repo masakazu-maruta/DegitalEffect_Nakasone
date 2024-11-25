@@ -18,11 +18,20 @@
     }
     </style>
 <body>
-    <picture>
-        <source srcset="./assets/images/top/opening/wearhouse.webp" type="image/webp">
-        <source srcset="./assets/images/top/opening/wearhouse.png" type="image/png">
-        <img class = "test-warehouse" id="js-openingWarehouse" src="">
-    </picture>
+    <section class="opening">
+        <svg class="topOpSvg" viewBox="0 0 100 100">
+            <circle class="topOpSvg__background --1" />
+            <circle class="topOpSvg__background --2" />
+            <circle class="topOpSvg__background --3" />
+            <circle class="topOpSvg__background --4" />
+        </svg>
+        <picture>
+            <source srcset="./assets/images/items/warehouse/wearhouse.webp" type="image/webp">
+            <source srcset="./assets/images/items/warehouse/wearhouse.png" type="image/png">
+            <img class = "test-warehouse" id="script-openingWarehouse" src="">
+        </picture>
+    </section>
+    
     <!-- <div class="topOp">
         <svg class="topOpSvg" viewBox="0 0 100 100">
             <circle class="topOpSvg__background --1" />
