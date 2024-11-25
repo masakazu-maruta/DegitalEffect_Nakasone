@@ -8,9 +8,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiko&display=swap" rel="stylesheet">
     <title>とっぷ</title>
 </head>
-
+<style>
+    .test-warehouse{
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        width: 500px;
+    }
+    </style>
 <body>
-    <div class="topOp">
+    <picture>
+        <source srcset="./assets/images/top/opening/wearhouse.webp" type="image/webp">
+        <source srcset="./assets/images/top/opening/wearhouse.png" type="image/png">
+        <img class = "test-warehouse" id="js-openingWarehouse" src="">
+    </picture>
+    <!-- <div class="topOp">
         <svg class="topOpSvg" viewBox="0 0 100 100">
             <circle class="topOpSvg__background --1" />
             <circle class="topOpSvg__background --2" />
@@ -41,7 +54,7 @@
             id="js-mainFrameBorderRight"></nakasone-frame-border-right>
         <nakasone-frame-text class="topMainText" id="js-mainFrameText"></nakasone-frame-text>
         <nakasone-frame-text-first class="topMainText" id="js-mainFrameTextFirst"></nakasone-frame-text-first>
-    </div>
+    </div> -->
     <!-- <div class="topSection">
         <div class="topSectionCardContainer">
             <div class="topSectionCard">

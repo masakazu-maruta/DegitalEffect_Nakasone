@@ -8,6 +8,7 @@ import MainFrameTextFirstController from "./controller/mainFrameTextFirst";
 import { MainFrameBorderRight } from "./components/mainFrameBorderRight";
 import mainFrameBorderRightController from "./controller/mainFrameBoderRight";
 import { MainBackground } from "./components/mainBackground";
+import opening from "./animation/opening";
 customElements.define("nakasone-logo", MainLogo);
 customElements.define("nakasone-frame-border", MainFrameBorder);
 customElements.define("nakasone-frame-border-right", MainFrameBorderRight);
@@ -21,3 +22,5 @@ MainFrameBorderController();
 MainFrameTextController();
 MainFrameTextFirstController();
 mainFrameBorderRightController();
+
+document.addEventListener("DOMContentLoaded", () => opening());
