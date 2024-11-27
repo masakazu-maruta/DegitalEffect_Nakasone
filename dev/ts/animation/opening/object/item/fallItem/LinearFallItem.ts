@@ -10,6 +10,6 @@ export class LinearFallItem implements IFallItem {
         onAnimationComplete();
       },
     });
-    tl.fromTo(imgElement, { scale: 1 }, { scale: newScale, duration: 5, ease: "power2.out", repeat: 1 });
+    tl.fromTo(imgElement, { scale: 1, y: "0vh" }, { scale: newScale, y: "40vh", duration: 2 });
   };
 }

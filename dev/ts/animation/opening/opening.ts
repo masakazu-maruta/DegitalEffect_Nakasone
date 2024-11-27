@@ -9,11 +9,11 @@ import { IImageGenerator } from "./processing/imageGenerator/IImageGenerator";
 import { RandomImageGenerator } from "./processing/imageGenerator/RandomImageGenerator";
 
 const opening = async () => {
-  const warehouse: Warehouse = new Warehouse("script-opningWarehouse", new PopSwellWarehouse(), new LinearReduceWarehouse());
+  const warehouse: Warehouse = new Warehouse("script-openingWarehouse", new PopSwellWarehouse(), new LinearReduceWarehouse());
   const imageGenerator: IImageGenerator = new RandomImageGenerator();
   const imageConverter: IImageConverter = new DictionaryImageConverter();
-  const collectResources: string[] = imageGenerator.generateNewImgs(12);
-  const createResources: string[] = imageConverter.img2newImg(collectResources);
+  const collectResources: string[] = await imageGenerator.generateNewImgs(12);
+  const createResources: string[] = await imageConverter.img2newImg(collectResources);
   await new Promise<void>((resolve) => {
     collect(collectResources, warehouse.swell, resolve);
   });
@@ -21,5 +21,4 @@ const opening = async () => {
     create(createResources, resolve);
   });
 };
-
 export default opening;

@@ -5,7 +5,6 @@ import { LinearFallItem } from "../../object/item/fallItem/LinearFallItem";
 import { Item } from "../../object/item/Item";
 
 const collect = async (imageUrls: string[], fallFinishedAction: () => void, finishedAction: () => void) => {
-  const itemCount = 24;
   const fallStrategy: IFallItem = new LinearFallItem();
   const expandStrategy: IExpandItem = new LinearExpandItem();
   const items: Item[] = generateElementArray(imageUrls, fallStrategy, expandStrategy);
@@ -16,7 +15,7 @@ const collect = async (imageUrls: string[], fallFinishedAction: () => void, fini
           fallFinishedAction();
           resolve();
         });
-      }, index * 500);
+      }, index * 300);
     });
   });
   await Promise.all(animationPromises);
@@ -26,7 +25,7 @@ const collect = async (imageUrls: string[], fallFinishedAction: () => void, fini
 const generateElementArray = (srcs: string[], fallStrategy: IFallItem, expandStrategy: IExpandItem) => {
   const imageElementArray: Item[] = [];
   srcs.forEach((src) => {
-    const item = new Item(src, 0, 0, undefined, fallStrategy, expandStrategy);
+    const item = new Item(src, 50, 0, fallStrategy, expandStrategy, "script-openingParent");
     imageElementArray.push(item);
   });
   return imageElementArray;

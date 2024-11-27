@@ -7,7 +7,7 @@ export class RandomImageGenerator implements IImageGenerator {
     const imageLength = images.length;
     const returnImageUrlArray: string[] = [];
     for (let i = 0; i < n; i++) {
-      const index = Math.random() * imageLength;
+      const index = Math.floor(Math.random() * imageLength);
       returnImageUrlArray.push(images[index]);
     }
     return returnImageUrlArray;

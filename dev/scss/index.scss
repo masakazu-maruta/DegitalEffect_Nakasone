@@ -59,6 +59,7 @@ body {
 .topOpSvg {
   width: 100vw;
   height: 100vh;
+  z-index: -20;
   background-color: #4a8a6f;
   .topOpSvg__background {
     cx: 50;

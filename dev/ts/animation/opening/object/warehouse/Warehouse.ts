@@ -10,6 +10,7 @@ export class Warehouse {
     private reduceStrategy: IReduceWarehouse
   ) {
     this.imgElement = document.getElementById(id) as HTMLImageElement;
+    console.log(this.imgElement);
   }
 
   public swell = () => {

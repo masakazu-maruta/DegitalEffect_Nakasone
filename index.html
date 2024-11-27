@@ -15,10 +15,11 @@
         left:50%;
         transform:translate(-50%,-50%);
         width: 500px;
+        z-index: 10;
     }
     </style>
 <body>
-    <section class="opening">
+    <section id="script-openingParent" class="opening">
         <svg class="topOpSvg" viewBox="0 0 100 100">
             <circle class="topOpSvg__background --1" />
             <circle class="topOpSvg__background --2" />
@@ -30,6 +31,7 @@
             <source srcset="./assets/images/items/warehouse/wearhouse.png" type="image/png">
             <img class = "test-warehouse" id="script-openingWarehouse" src="">
         </picture>
+
     </section>
     
     <!-- <div class="topOp">
