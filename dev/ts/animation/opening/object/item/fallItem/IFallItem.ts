@@ -1,3 +1,3 @@
 export interface IFallItem {
-  fall(imgElement: HTMLImageElement, onAnimationComplete: () => void): void;
+  fall(htmlElement: HTMLElement, goalElement: HTMLElement, onAnimationComplete: () => void): void;
 }

@@ -2,7 +2,7 @@ import { IReduceWarehouse } from "./reduceWarehouse/IReduceWarehouse";
 import { ISwellWarehouse } from "./swellWarehouse/ISwellWarehouse";
 
 export class Warehouse {
-  private readonly imgElement: HTMLImageElement;
+  public readonly imgElement: HTMLImageElement;
   private currentScale: number = 1;
   constructor(
     id: string,

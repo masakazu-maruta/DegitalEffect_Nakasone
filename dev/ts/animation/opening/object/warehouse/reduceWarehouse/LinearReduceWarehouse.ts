@@ -6,6 +6,6 @@ export class LinearReduceWarehouse implements IReduceWarehouse {
     gsap.killTweensOf(imgElement);
     const newScale = oldScale * 0.3;
     updateScaleAction(newScale);
-    gsap.fromTo(imgElement, { scale: newScale }, { scale: newScale, duration: 3, ease: "power2.out", repeat: 1 });
+    gsap.fromTo(imgElement, { scale: oldScale }, { scale: newScale, duration: 0.5, ease: "power2.out" });
   };
 }

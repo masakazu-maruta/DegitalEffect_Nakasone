@@ -9,15 +9,195 @@
     <title>とっぷ</title>
 </head>
 <style>
-    .test-warehouse{
-        position:absolute;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
+    .opening{
+        position : absolute;
+        height: 100vh;
+        width: 100vw;
+        z-index: 100;
+    }
+    .test-warehouse {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 500px;
         z-index: 10;
     }
-    </style>
+
+    #script__openingCollectBox {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+    }
+
+    #script__openingCreateBox {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 20;
+    }
+
+    .conveyer {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        z-index:0;
+    }
+
+    .conveyer__uiLayer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    .conveyer__3dLayer {
+        transform-style: preserve-3d;
+        perspective: 1600px;
+        top: 0;
+        perspective-origin: 100% 0;
+        width: 100%;
+        height: 100%;
+        transform-origin: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: -10;
+    }
+
+    .conveyer__logo {
+        position: relative;
+        width: 800px;
+        height: 800px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        z-index: 10;
+    }
+    .conveyer__iconBox {
+        position:absolute;
+        width:100%;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        border-radius: 50%;
+    }
+
+    .conveyer__logoBackground {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: white;
+        opacity: 0.86;
+        filter: blur(20px);
+        z-index: -10;
+    }
+
+    .conveyer__flow {
+        position: relative;
+        transform-style: preserve-3d;
+        width: 60%;
+        height: 100%;
+        height: 350%;
+        transform: rotateX(70deg) rotateZ(20deg);
+        /* transform: rotateX(45deg) rotateY(-10deg) rotateZ(45deg); */
+
+        border: 5px solid black;
+
+
+    }
+
+    .conveyer__flow::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 108%;
+        height: 108%;
+        border: 5px solid black;
+        box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.4),
+            -20px -20px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .conveyer__image {
+        position: absolute;
+        transform-style: preserve-3d;
+        filter: drop-shadow(20px 20px 15px rgba(0, 0, 0, 0.3));
+        width : 150px;
+        height: auto;
+        max-height: 200px;
+        object-fit: contain;
+    }
+
+    .conveyer__frame {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #path {
+        animation: just 2s ease-in-out forwards;
+        /* アニメーションを設定 */
+    }
+
+    #path2 {
+        stroke-dashoffset: 100;
+        animation: just2 2s 3s ease-in-out forwards;
+        /* アニメーションを設定 */
+    }
+
+    #t-t {
+        start-offset: 50;
+        animation: moveText 2s ease-in-out forwards;
+    }
+
+    @keyframes just {
+        0% {
+            stroke-dashoffset: 100;
+        }
+
+        100% {
+            stroke-dashoffset: -50;
+        }
+    }
+
+    @keyframes just2 {
+        0% {
+            stroke-dashoffset: 100;
+        }
+
+        100% {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    @keyframes moveText {
+        0% {
+            startOffset: 0;
+        }
+
+        100% {
+            startOffset: 100;
+        }
+    }
+</style>
+
 <body>
     <section id="script-openingParent" class="opening">
         <svg class="topOpSvg" viewBox="0 0 100 100">
@@ -31,67 +211,54 @@
             <source srcset="./assets/images/items/warehouse/wearhouse.png" type="image/png">
             <img class = "test-warehouse" id="script-openingWarehouse" src="">
         </picture>
-
+        <div id="script__openingCollectBox"></div>
+        <div id="script__openingCreateBox"></div>
     </section>
-    
-    <!-- <div class="topOp">
-        <svg class="topOpSvg" viewBox="0 0 100 100">
-            <circle class="topOpSvg__background --1" />
-            <circle class="topOpSvg__background --2" />
-            <circle class="topOpSvg__background --3" />
-            <circle class="topOpSvg__background --4" />
-        </svg>
-        <picture>
-            <source srcset="./assets/images/top/opening/wearhouse.webp" type="image/webp">
-            <source srcset="./assets/images/top/opening/wearhouse.png" type="image/png">
-            <img class="topOp__imgWearhouse" src="">
-        </picture>
-        <picture>
-            <source srcset="./assets/images/top/opening/fallClothes.webp" type="image/webp">
-            <source srcset="./assets/images/top/opening/fallClothes.png" type="image/png">
-            <img class="topOp__imgFallClothes" src="">
-        </picture>
-        <picture>
-            <source srcset="./assets/images/top/opening/expandClothes.webp" type="image/webp">
-            <source srcset="./assets/images/top/opening/expandClothes.png" type="image/png">
-            <img class="topOp__imgExpandClothes" src="">
-        </picture>
-    </div>
-    <div class="topMain">
-        <nakasone-background class="topMain-background"></nakasone-background>
-        <nakasone-logo class="topMain__logo"></nakasone-logo>
-        <nakasone-frame-border class="topMainFrame" id="js-mainFrameBorder"></nakasone-frame-border>
-        <nakasone-frame-border-right class="topMainFrameRight"
-            id="js-mainFrameBorderRight"></nakasone-frame-border-right>
-        <nakasone-frame-text class="topMainText" id="js-mainFrameText"></nakasone-frame-text>
-        <nakasone-frame-text-first class="topMainText" id="js-mainFrameTextFirst"></nakasone-frame-text-first>
-    </div> -->
-    <!-- <div class="topSection">
-        <div class="topSectionCardContainer">
-            <div class="topSectionCard">
-                <img class="topSectionCard__image" src="./assets/images/top/category/park.png">
-                <p class="topSectionCard__text"></p>
+    <section id="script-conveyerParent" class="conveyer">
+        <div class="conveyer__uiLayer">
+            <div id ="script-logo" class="conveyer__logo">
+                <div class="conveyer__logoBackground"></div>
+                <picture>
+                    <source srcset="./assets/images/logo/logo.svg" type="image/webp">
+                    <img class="test-logoText" id="script-conveyerLogoText" src="">
+                </picture>
+                <div id ="script-logoContainer"  class="conveyer__iconBox"></div>
             </div>
-            <div class="topSectionCard">
-                <img class="topSectionCard__image" src="./assets/images/top/category/trash.png">
-                <p class="topSectionCard__text"></p>
-            </div>
-            <div class="topSectionCard">
-                <img class="topSectionCard__image" src="./assets/images/top/category/glass.png">
-                <p class="topSectionCard__text"></p>
-            </div>
-            <div class="topSectionCard">
-                <img class="topSectionCard__image" src="./assets/images/top/category/leaf.png">
-                <p class="topSectionCard__text"></p>
+            <svg class="conveyer__frame" id="script-frameSvg"  xmlns="http://www.w3.org/2000/svg">
+            </svg>
+        </div> 
+        <div class="conveyer__3dLayer">
+            <div id="script-conveyerFlow" class="conveyer__flow">
+            <img class="conveyer__image --1" src="./assets/images/items/create/clothes_1.png">
+                <img class="conveyer__image --2" src="./assets/images/items/create/clothes_1.png">
+                <img class="conveyer__image --3" src="./assets/images/items/create/clothes_1.png">
+                <img class="conveyer__image --4" src="./assets/images/items/create/clothes_1.png">
+                <img class="conveyer__image --5" src="./assets/images/items/create/clothes_1.png">
             </div>
         </div>
-        <div class="topSectionMessage --large">
-            <p class="topSectionMessage__text --large">服から服をつくる</p>
+    </section> 
+    <!-- <section class="static">
+        <div class="staticCardContainer">
+            <div class="staticCard --park">
+                <p class="staticCard__text">事業領域</p>
+            </div>
+            <div class="staticCard --trash">
+                <p class="staticCard__text">事業領域</p>
+            </div>
+            <div class="staticCard --glass">
+                <p class="staticCard__text">事業領域</p>
+            </div>
+            <div class="staticCard --leaf">
+                <p class="staticCard__text">事業領域</p>
+            </div>
         </div>
-        <div class="topSectionMessage">
-            <p class="topSectionMessage__text">CLOTHS to CLOTHS</p>
+        <div class="staticMessage --large">
+            <p class="staticMessage__text --large">服から服をつくる</p>
         </div>
-    </div> -->
+        <div class="staticMessage">
+            <p class="staticMessage__text">CLOTHS to CLOTHS</p>
+        </div>
+    </section> -->
 </body>
 <script src="./assets/js/main/main.js"></script>
 

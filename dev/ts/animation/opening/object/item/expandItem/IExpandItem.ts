@@ -1,3 +1,3 @@
 export interface IExpandItem {
-  expand(imgElement: HTMLImageElement, onAnimationComplete: () => void): Promise<void>;
+  expand(htmlElement: HTMLElement, onAnimationComplete: () => void): Promise<void>;
 }

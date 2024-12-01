@@ -1,4 +1,4 @@
-export class GlobalAssetManager {
+export default class GlobalAssetManager {
   private static instance: GlobalAssetManager;
   private imageUrlPrefix: string = "assets/images/";
   private constructor() {}
@@ -9,8 +9,8 @@ export class GlobalAssetManager {
     return GlobalAssetManager.instance;
   };
 
-  public getUrlCollectPngs = (): string[] => {
-    const itemUrlPrefix: string = "items/collect/";
+  public getUrlCreatePngs = (): string[] => {
+    const itemUrlPrefix: string = "items/create/";
     const imageUrlArray: string[] = [
       "clothes_1.png",
       "clothes_2.png",
@@ -20,11 +20,14 @@ export class GlobalAssetManager {
       "clothes_6.png",
       "clothes_7.png",
       "clothes_8.png",
+      "pet_1.png",
+      "pet_2.png",
+      "pet_3.png",
     ];
     return this.local2globalUrl(imageUrlArray, itemUrlPrefix);
   };
-  public getUrlCreatePngs = (): string[] => {
-    const itemUrlPrefix: string = "items/create/";
+  public getUrlCollectPngs = (): string[] => {
+    const itemUrlPrefix: string = "items/collect/";
     const imageUrlArray: string[] = [
       "clothes_1.png",
       "clothes_2.png",

@@ -1,4 +1,4 @@
-import { GlobalAssetManager } from "../../../../util/GlobalAssetManager";
+import GlobalAssetManager from "../../../../util/GlobalAssetManager";
 import { IImageGenerator } from "./IImageGenerator";
 
 export class RandomImageGenerator implements IImageGenerator {
