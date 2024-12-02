@@ -100,7 +100,7 @@ class Clothes {
   constructor(parent: HTMLElement, src: string) {
     const element = document.createElement("img");
     element.src = src;
-    element.className = "conveyer__image";
+    element.className = "conveyer-3d__clothes-item";
     const randomZ = Math.random() * 20 + 10;
     element.style.transform = `translate3d(-50%,-50%, ${randomZ}px)`;
     this.htmlElement = element;

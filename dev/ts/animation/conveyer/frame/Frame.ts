@@ -14,16 +14,10 @@ export default class Frame {
   private secondText: SvgTextClass;
   constructor(id: string) {
     this.htmlElement = new Svg(id);
-    this.leftFrame = this.createLeftFrame();
-    this.rightFrame = this.createRightFrame();
-    this.firstText = this.createFirstText();
-    this.secondText = this.createSecondText();
-    this.htmlElement.getElement().appendChild(this.leftFrame);
-    this.htmlElement.getElement().appendChild(this.rightFrame);
-    this.htmlElement.getElement().appendChild(this.firstText.path);
-    this.htmlElement.getElement().appendChild(this.secondText.path);
-    this.htmlElement.getElement().appendChild(this.firstText.text);
-    this.htmlElement.getElement().appendChild(this.secondText.text);
+    this.leftFrame = this.getLeftFrame("script-frameLeft");
+    this.rightFrame = this.getRightFrame("script-frameRight");
+    this.firstText = this.getTextSvg("script-firstTextPath", "script-firstTextText", "script-firstTextTextPath");
+    this.secondText = this.getTextSvg("script-secondTextPath", "script-secondTextText", "script-secondTextTextPath");
   }
   private getPathLength = () => {
     return this.htmlElement.getMaxHeight() + this.getPathWidth();
@@ -44,12 +38,9 @@ export default class Frame {
   private getPathWidth = () => {
     return this.htmlElement.getMaxWidth() * 0.7;
   };
-  public createLeftFrame = (): SVGPathElement => {
-    const svgPathElement: SVGPathElement = document.createElementNS(SVG_URL, "path");
-    svgPathElement.setAttribute("id", "script-frameLeft");
-    svgPathElement.setAttribute("stroke", "black");
-    svgPathElement.setAttribute("stroke-width", "5");
-    svgPathElement.setAttribute("fill", "none");
+  public getLeftFrame = (id: string): SVGPathElement => {
+    const svgPathElement = document.getElementById(id);
+    if (!svgPathElement || !(svgPathElement instanceof SVGPathElement)) throw new Error("svgPathElementが見つかりません");
     svgPathElement.setAttribute("strokeDashoffset", `${this.getPathLineLength()}`);
     svgPathElement.setAttribute(
       "d",
@@ -73,12 +64,9 @@ export default class Frame {
     });
     return svgPathElement;
   };
-  public createRightFrame = (): SVGPathElement => {
-    const svgPathElement: SVGPathElement = document.createElementNS(SVG_URL, "path");
-    svgPathElement.setAttribute("id", "script-frameRight");
-    svgPathElement.setAttribute("stroke", "black");
-    svgPathElement.setAttribute("stroke-width", "5");
-    svgPathElement.setAttribute("fill", "none");
+  public getRightFrame = (id: string): SVGPathElement => {
+    const svgPathElement = document.getElementById(id);
+    if (!svgPathElement || !(svgPathElement instanceof SVGPathElement)) throw new Error("svgPathElementが見つかりません");
     svgPathElement.setAttribute(
       "d",
       `M ${this.ratio2ViewPortWidth(0.95)} ${this.getPathHeight()} V ${this.ratio2ViewPortHeight(0.05)} H ${this.ratio2ViewPortWidth(0.95) - this.getPathWidth()}`
@@ -101,42 +89,22 @@ export default class Frame {
     });
     return svgPathElement;
   };
-  public createFirstText = (): SvgTextClass => {
+  public getTextSvg = (pathId: string, textId: string, textPathId: string): SvgTextClass => {
+    const svgPathElement = document.getElementById(pathId);
+    if (!svgPathElement || !(svgPathElement instanceof SVGPathElement)) throw new Error("svgPathElementが見つかりません");
+    const svgTextElement = document.getElementById(textId);
+    if (!svgTextElement || !(svgTextElement instanceof SVGTextElement)) throw new Error("svgTextElementが見つかりません");
+    const svgTextPathElement = document.getElementById(textPathId);
+    if (!svgTextPathElement || !(svgTextPathElement instanceof SVGTextPathElement))
+      throw new Error("svgTextPathElementが見つかりません");
     const firstText: SvgTextClass = {
-      path: document.createElementNS(SVG_URL, "path"),
-      text: document.createElementNS(SVG_URL, "text"),
-      textPath: document.createElementNS(SVG_URL, "textPath"),
+      path: svgPathElement,
+      text: svgTextElement,
+      textPath: svgTextPathElement,
     };
-    firstText.path.setAttribute("stroke", "transparent");
-    firstText.path.setAttribute("fill", "transparent");
-    firstText.path.setAttribute("id", "script-firstTextPath");
-    firstText.text.setAttribute("font-size", "60");
-    firstText.text.setAttribute("font-family", "Arial");
-    firstText.text.setAttribute("fill", "black");
-    firstText.textPath.setAttribute("id", "script-firstText");
-    firstText.textPath.setAttribute("href", "#script-firstTextPath");
-    firstText.textPath.textContent = "あらゆるものを循環させる";
-    firstText.text.appendChild(firstText.textPath);
     return firstText;
   };
-  public createSecondText = (): SvgTextClass => {
-    const secondText: SvgTextClass = {
-      path: document.createElementNS(SVG_URL, "path"),
-      text: document.createElementNS(SVG_URL, "text"),
-      textPath: document.createElementNS(SVG_URL, "textPath"),
-    };
-    secondText.path.setAttribute("stroke", "transparent");
-    secondText.path.setAttribute("fill", "transparent");
-    secondText.path.setAttribute("id", "script-secondTextPath");
-    secondText.text.setAttribute("font-size", "60");
-    secondText.text.setAttribute("font-family", "Arial");
-    secondText.text.setAttribute("fill", "black");
-    secondText.textPath.setAttribute("id", "script-secondText");
-    secondText.textPath.setAttribute("href", "#script-secondTextPath");
-    secondText.textPath.textContent = "We circulate our world";
-    secondText.text.appendChild(secondText.textPath);
-    return secondText;
-  };
+
   public leftFrameAnim = async (duration: number) => {
     await new Promise<void>((resolve) => {
       gsap.fromTo(
@@ -232,22 +200,3 @@ export default class Frame {
     );
   };
 }
-
-// <svg class="conveyer__frame" viewBox="0 0 100 100">
-//     <path id="path" d="M 0 0 V 100 H 50" stroke="black" stroke-width="1" fill="none"
-//         stroke-dasharray="100 150"></path>
-//     <path id="path2" d="M 100 50 V 0  H 50" stroke="black" stroke-width="1" fill="none"
-//         stroke-dasharray="100"></path>
-//     <path id="t-path" d="M 10 0 V 90 H 50" stroke="black" stroke-width="0" fill="none"></path>
-//     <path id="t-path2" d="M 10 0 V 90" stroke="black" stroke-width="0" fill="none" stroke-dasharray="100">
-//     </path>
-//     <text fill="black" font-size="5" font-family="Arial">
-//         <textPath id="t-t" href="#t-path">てすとてすとてすと
-//             <animate attributeName="startOffset" from="0" to="100%" dur="2s" repeatCount="1"
-//                 fill="freeze" />
-//         </textPath>
-//     </text>
-//     <text fill="black" font-size="5" font-family="Arial">
-//         <textPath id="textPath" href="#t-path2">あああああああああ</textPath>
-//     </text>
-// </svg>

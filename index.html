@@ -32,9 +32,36 @@
                     <source srcset="./assets/images/logo/logo.svg" type="image/webp">
                     <img class="conveyer-ui__logo-text" id="script-conveyerLogoText" src="">
                 </picture>
-                <div class="conveyer-ui__logo-icons" id ="script-logoContainer"></div>
+                <div class="conveyer-ui__logo-icons" id ="script-logoContainer">
+                    <div class="conveyer-ui__logo-icons-item --wear">
+                        <img class="conveyer-ui__logo-img" src="./assets/images/logo/wear.svg">
+                        <p class="conveyer-ui__logo-icons-text">着る</p>
+                    </div>
+                    <div class="conveyer-ui__logo-icons-item --collect">
+                        <img class="conveyer-ui__logo-img" src="./assets/images/logo/bee.png">
+                        <p class="conveyer-ui__logo-icons-text">服を回収する</p>
+                    </div>
+                    <div class="conveyer-ui__logo-icons-item --recycle">
+                        <img class="conveyer-ui__logo-img" src="./assets/images/logo/recycle.svg">
+                        <p class="conveyer-ui__logo-icons-text">リサイクル</p>
+                    </div>
+                    <div class="conveyer-ui__logo-icons-item --create">
+                        <img class="conveyer-ui__logo-img" src="./assets/images/logo/create.svg">
+                        <p class="conveyer-ui__logo-icons-text">服を作る</p>
+                    </div>
+                </div>
             </div>
-            <svg class="conveyer-ui__frame" id="script-frameSvg"  xmlns="http://www.w3.org/2000/svg">
+            <svg class="conveyer-ui__frame" id="script-frameSvg" xmlns="http://www.w3.org/2000/svg">
+                <path id="script-frameLeft" stroke="black" stroke-width="5" fill="none" stroke-dashoffset="0"></path>
+                <path id="script-frameRight" stroke="black" stroke-width="5" fill="none" stroke-dashoffset="0"></path>
+                <path id="script-firstTextPath" stroke="transparent" fill="transparent"></path>
+                <path id="script-secondTextPath" stroke="transparent" fill="transparent"></path>
+                <text id="script-firstTextText" font-size="60" font-family="Arial" fill="black">
+                    <textPath id="script-firstTextTextPath" href="#script-firstTextPath">あらゆるものを循環させる</textPath>
+                </text>
+                <text id="script-secondTextText" font-size="60" font-family="Arial" fill="black">
+                    <textPath id="script-secondTextTextPath" href="#script-secondTextPath">We circulate our world</textPath>
+                </text>
             </svg>
         </div> 
         <div class="conveyer-3d">

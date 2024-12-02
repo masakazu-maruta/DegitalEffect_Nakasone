@@ -1,5 +1,4 @@
 import gsap from "gsap";
-import Logo from "./Logo";
 interface LogoInformation {
   src: string;
   text: string;
@@ -13,19 +12,15 @@ export default class Logos {
     const _parentElement = document.getElementById(containerId);
     _parentElement ? (this.parentElement = _parentElement) : null;
     if (!this.parentElement) throw new Error("containerが見つかりませんでした。");
-    const infoArray: LogoInformation[] = [
-      { src: "assets/images/logo/wear.svg", text: "着る", modifier: "--wear" },
-      { src: "assets/images/logo/bee.png", text: "服を回収する", modifier: "--collect" },
-      { src: "assets/images/logo/recycle.svg", text: "リサイクル", modifier: "--recycle" },
-      { src: "assets/images/logo/create.svg", text: "服を作る", modifier: "--create" },
-    ];
-    infoArray.forEach((info) => {
-      const logo: Logo = new Logo(info.src, info.text, info.modifier);
-      const arrowElement = this.createArrowElement();
-      this.parentElement.appendChild(logo.htmlElement);
-      this.parentElement.appendChild(arrowElement);
-      this.htmlElementArray.push(logo.htmlElement);
-      this.arrowElementArray.push(arrowElement);
+    document.querySelectorAll(".conveyer-ui__logo-icons-item").forEach((element) => {
+      if (!element || !(element instanceof HTMLElement)) throw new Error("icon-itemが見つかりません");
+      element.style.top = `calc(50% -  ${element.offsetHeight / 2}px)`;
+      element.style.left = `calc(50% - ${element.offsetWidth / 2}px)`;
+      this.htmlElementArray.push(element);
+      this.arrowElementArray.push(this.createArrowElement());
+    });
+    this.arrowElementArray.forEach((element) => {
+      this.parentElement.appendChild(element);
     });
   }
 
@@ -34,10 +29,8 @@ export default class Logos {
     element.src = "assets/images/logo/arrowLeft.svg";
     element.className = "conveyer-ui__logo-icons-arrow";
     const resizeObserver = new ResizeObserver(() => {
-      const halfHeight = element.offsetHeight / 2;
-      const halfWidth = element.offsetWidth / 2;
-      element.style.top = `calc(50% -  ${halfHeight}px)`;
-      element.style.left = `calc(50% - ${halfWidth}px)`;
+      element.style.top = `calc(50% -  ${element.offsetHeight / 2}px)`;
+      element.style.left = `calc(50% - ${element.offsetWidth / 2}px)`;
     });
     resizeObserver.observe(element);
     return element;
@@ -97,6 +90,4 @@ export default class Logos {
     const angle = angleStep * index;
     element.style.transform = `rotate(${angle}deg) translateY(${radius}px)`;
   };
-
-  private logoRotate = (element: HTMLElement) => {};
 }
