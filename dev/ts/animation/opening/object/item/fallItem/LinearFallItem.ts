@@ -35,7 +35,6 @@ export class LinearFallItem implements IFallItem {
   public calculateAngle = (x1: number, y1: number, x2: number, y2: number) => {
     const rad = Math.atan2(y2 - y1, x2 - x1);
     const deg = (180 * rad) / Math.PI;
-    console.log(deg);
     return (deg - 90) / 1.5;
   };
 }

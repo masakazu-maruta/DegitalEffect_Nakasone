@@ -205,7 +205,6 @@ export default class Frame {
       setTimeout(() => {
         const bBox = this.secondText.text.getBBox();
         const textWidth = bBox.width;
-        console.log(textWidth);
         this.secondText.path.setAttribute(
           "d",
           `M ${this.ratio2ViewPortWidth(0.07)} ${-textWidth} V ${this.ratio2ViewPortHeight(0.93)} h ${textWidth}`

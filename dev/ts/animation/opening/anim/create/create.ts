@@ -11,7 +11,6 @@ const create = async (imageUrls: string[], warehouse: Warehouse, finishedAction:
   const expandStrategy: IExpandItem = new LinearExpandItem();
   const fallStrategy: IFallItem = new LinearFallItem();
   const items: Item[] = generateElementArray(imageUrls, fallStrategy, expandStrategy);
-  console.log(imageUrls);
   const warehousePromises = new Promise<void>(async (resolve) => {
     await warehouse.reduce();
     resolve();

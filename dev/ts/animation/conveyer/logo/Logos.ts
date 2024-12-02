@@ -3,7 +3,7 @@ import Logo from "./Logo";
 interface LogoInformation {
   src: string;
   text: string;
-  size: number;
+  modifier: string;
 }
 export default class Logos {
   private parentElement: HTMLElement;
@@ -14,13 +14,13 @@ export default class Logos {
     _parentElement ? (this.parentElement = _parentElement) : null;
     if (!this.parentElement) throw new Error("containerが見つかりませんでした。");
     const infoArray: LogoInformation[] = [
-      { src: "assets/images/logo/wear.svg", text: "着る", size: 80 },
-      { src: "assets/images/logo/bee.png", text: "服を回収する", size: 190 },
-      { src: "assets/images/logo/recycle.svg", text: "リサイクル", size: 90 },
-      { src: "assets/images/logo/create.svg", text: "服を作る", size: 90 },
+      { src: "assets/images/logo/wear.svg", text: "着る", modifier: "--wear" },
+      { src: "assets/images/logo/bee.png", text: "服を回収する", modifier: "--collect" },
+      { src: "assets/images/logo/recycle.svg", text: "リサイクル", modifier: "--recycle" },
+      { src: "assets/images/logo/create.svg", text: "服を作る", modifier: "--create" },
     ];
     infoArray.forEach((info) => {
-      const logo: Logo = new Logo(info.src, info.text, info.size);
+      const logo: Logo = new Logo(info.src, info.text, info.modifier);
       const arrowElement = this.createArrowElement();
       this.parentElement.appendChild(logo.htmlElement);
       this.parentElement.appendChild(arrowElement);
@@ -32,10 +32,8 @@ export default class Logos {
   createArrowElement = () => {
     const element = document.createElement("img") as HTMLImageElement;
     element.src = "assets/images/logo/arrowLeft.svg";
-    element.style.width = "200px";
-    element.style.height = "auto";
+    element.className = "conveyer-ui__logo-icons-arrow";
     const resizeObserver = new ResizeObserver(() => {
-      element.style.position = "absolute";
       const halfHeight = element.offsetHeight / 2;
       const halfWidth = element.offsetWidth / 2;
       element.style.top = `calc(50% -  ${halfHeight}px)`;
