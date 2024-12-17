@@ -9,7 +9,7 @@ export default class ContainerAssetManager {
     const i = GlobalFunction.getInstance();
     this.openingContainer = i.getElementByCheckedId("script-openingParent");
     this.conveyerContainer = i.getElementByCheckedId("script-conveyerParent");
-    // this.staticContainer = i.getElementByCheckedId("script-staticParent");
+    this.staticContainer = i.getElementByCheckedId("script-staticParent");
   }
   public static getInstance = (): ContainerAssetManager => {
     if (!this.instance) this.instance = new ContainerAssetManager();

@@ -10,4 +10,14 @@ export default class GlobalFunction {
     if (!element) throw new Error("elementが見つかりませんでした。");
     return element as T;
   };
+
+  public getScaleFromElement = (element: HTMLElement) => {
+    const transformValue = window.getComputedStyle(element).transform;
+    const scaleMatch = transformValue.match(/scale\(([^)]+)\)/);
+    if (scaleMatch) {
+      return parseFloat(scaleMatch[1]);
+    } else {
+      return 1;
+    }
+  };
 }

@@ -2,36 +2,40 @@ import { IFactoryAnim } from "./IFactoryAnim";
 import GlobalAssetManager from "../../../util/GlobalAssetManager";
 import gsap from "gsap";
 import FactoryAssetManager from "./FactoryAssetManager";
+import ConveyerClothes from "../../../objects/conveyer/ConveyerClothes";
 export default class RandomFactoryAnim implements IFactoryAnim {
   private manager: FactoryAssetManager;
-  private clothesArray: (Clothes | null)[] = [];
-  private interval = 100;
+  private clothesArray: (ConveyerClothes | null)[] = [];
+  private interval = 10;
   constructor() {
     this.manager = FactoryAssetManager.getInstance();
   }
   public startAnim: (duration: number) => void = async (duration: number) => {
     const imageSrcs: string[] = GlobalAssetManager.getInstance().getUrlCreatePngs() || null;
-    setTimeout(() => this.intervalFunction(imageSrcs, duration), this.interval);
+    this.intervalFunction(imageSrcs, duration);
   };
   public stopAnim = () => {};
   intervalFunction = async (imageSrcs: string[], duration: number) => {
-    await this.randomGenerate(imageSrcs, duration); // 非同期関数を待ってから次へ進む
-    setTimeout(() => this.intervalFunction(imageSrcs, duration), this.interval); // 次のタイマーをセット
+    await this.randomGenerate(imageSrcs, duration);
+    setTimeout(() => this.intervalFunction(imageSrcs, duration), this.interval);
   };
   private randomGenerate = async (imageSrcs: string[], duration: number) => {
     const randomSrcIndex = Math.floor((Math.random() * 100) % imageSrcs.length);
-    const clothes: Clothes = new Clothes(this.manager.container, imageSrcs[randomSrcIndex]);
+    const clothes: ConveyerClothes = new ConveyerClothes(imageSrcs[randomSrcIndex]);
     await new Promise<void>((resolve) => {
       this.randomPosition(resolve, clothes); // この処理が終わるまで待つ
     });
     this.enrollAnimation(clothes, duration);
   };
-  private randomPosition = async (resolve: (value: void | PromiseLike<void>) => void, clothes: Clothes) => {
-    const clothesWidth = clothes.htmlElement.offsetWidth;
+  private randomPosition = async (resolve: (value: void | PromiseLike<void>) => void, clothes: ConveyerClothes) => {
+    const randomZ = Math.random() * 20 + 10;
+    clothes.element.style.transform = `translate3d(-50%,-50%, ${randomZ}px)`;
+    this.manager.container.appendChild(clothes.element);
+    const clothesWidth = clothes.element.offsetWidth;
     const parentWidth = this.manager.container.offsetWidth;
-    const randomX = Math.random() * (parentWidth - clothesWidth) + clothesWidth / 2;
-    clothes.htmlElement.style.left = `${randomX}px`;
-    clothes.htmlElement.style.bottom = `${0}px`;
+    const randomX = Math.random() * (parentWidth * 0.9 - clothesWidth) + clothesWidth / 2 + parentWidth * 0.1;
+    clothes.element.style.left = `${randomX}px`;
+    clothes.element.style.bottom = `${0}px`;
     setTimeout(() => {
       if (!this.hitCheck(clothes)) {
         return this.randomPosition(resolve, clothes);
@@ -41,68 +45,49 @@ export default class RandomFactoryAnim implements IFactoryAnim {
     }, 100);
   };
 
-  private enrollAnimation = (clothes: Clothes, duration: number) => {
-    const clothesHeight = clothes.htmlElement.offsetHeight;
+  private enrollAnimation = (clothes: ConveyerClothes, duration: number) => {
+    const clothesHeight = clothes.element.offsetHeight;
     const parentHeight = this.manager.container.offsetHeight;
     this.clothesArray.push(clothes);
     const index = this.clothesArray.length - 1;
     gsap.fromTo(
-      clothes.htmlElement,
+      clothes.element,
       {
         bottom: `${0}px`,
       },
       {
-        bottom: `${parentHeight + 200}px`,
+        bottom: `${parentHeight + 300}px`,
         duration: duration,
         ease: "linear",
         onUpdate: () => {
-          const bottom = parseFloat(gsap.getProperty(clothes.htmlElement, "bottom") as string);
+          const bottom = parseFloat(gsap.getProperty(clothes.element, "bottom") as string);
           if (bottom > 500) this.clothesArray[index] = null;
         },
         onComplete: () => {
-          clothes.htmlElement.remove();
+          clothes.element.remove();
           // this.clothesArray.splice(index, 1);
         },
       }
     );
   };
 
-  private hitCheck = (clothes: Clothes) => {
-    const element = clothes.htmlElement;
+  private hitCheck = (clothes: ConveyerClothes) => {
+    const element = clothes.element;
     for (let i = 0; i < this.clothesArray.length; i++) {
       if (clothes === this.clothesArray[i]) continue;
-      const compareElement = this.clothesArray[i]?.htmlElement;
+      const compareElement = this.clothesArray[i]?.element;
       if (!compareElement) continue;
       // x軸でのチェック
-      const elementHalfWidth = element.offsetWidth / 2;
-      const elementHalfHeight = element.offsetHeight / 2;
-      const compareElementHalfWidth = compareElement.offsetWidth / 2;
-      const compareElementHalfHeight = compareElement.offsetHeight / 2;
-      const xCheck =
-        element.offsetLeft + elementHalfWidth < compareElement.offsetLeft - compareElementHalfWidth ||
-        element.offsetLeft - elementHalfWidth > compareElement.offsetLeft + compareElementHalfWidth;
+      const elementHalfWidth = element.offsetWidth / 2 + 5;
+      const elementHalfHeight = element.offsetHeight / 2 + 5;
+      const compareElementHalfWidth = compareElement.offsetWidth / 2 + 5;
+      const compareElementHalfHeight = compareElement.offsetHeight / 2 + 5;
+      const xCheck = element.offsetLeft + elementHalfWidth < compareElement.offsetLeft - compareElementHalfWidth || element.offsetLeft - elementHalfWidth > compareElement.offsetLeft + compareElementHalfWidth;
       // y軸でのチェック
-      const yCheck =
-        element.offsetTop + elementHalfHeight < compareElement.offsetTop - compareElementHalfHeight ||
-        element.offsetTop - elementHalfHeight > compareElement.offsetTop + compareElementHalfHeight;
+      const yCheck = element.offsetTop + elementHalfHeight < compareElement.offsetTop - compareElementHalfHeight || element.offsetTop - elementHalfHeight > compareElement.offsetTop + compareElementHalfHeight;
       if (!xCheck && !yCheck) return false;
     }
     // 衝突しなければ true
     return true;
   };
-}
-
-class Clothes {
-  public readonly htmlElement: HTMLImageElement;
-  private width: number;
-  private height: number;
-  constructor(parent: HTMLElement, src: string) {
-    const element = document.createElement("img");
-    element.src = src;
-    element.className = "conveyer-3d__clothes-item";
-    const randomZ = Math.random() * 20 + 10;
-    element.style.transform = `translate3d(-50%,-50%, ${randomZ}px)`;
-    this.htmlElement = element;
-    parent.appendChild(this.htmlElement);
-  }
 }

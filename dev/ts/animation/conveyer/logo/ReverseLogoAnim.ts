@@ -2,7 +2,7 @@ import gsap from "gsap";
 import LogoAssetManager from "./LogoAssetManager";
 import { ILogoAnim } from "./ILogoAnim";
 import ConveyerArrow from "../../../objects/conveyer/ConveyerArrow";
-export default class SimpleLogoAnim implements ILogoAnim {
+export default class ReverseLogoAnim implements ILogoAnim {
   private manager: LogoAssetManager;
   private arrowArray: ConveyerArrow[] = [];
   constructor() {
@@ -32,7 +32,7 @@ export default class SimpleLogoAnim implements ILogoAnim {
         rotate: 0,
       },
       {
-        rotate: 360,
+        rotate: -360,
         repeat: -1,
         duration: duration,
         ease: "linear",
@@ -69,6 +69,6 @@ export default class SimpleLogoAnim implements ILogoAnim {
     const radius = (this.manager.container.offsetHeight / 2) * 0.7;
     const angleStep = 360 / length;
     const angle = angleStep * index;
-    element.style.transform = `rotate(${angle}deg) translateY(${radius}px)`;
+    element.style.transform = `rotate(${angle}deg) translateY(${radius}px) scaleX(-1)`;
   };
 }

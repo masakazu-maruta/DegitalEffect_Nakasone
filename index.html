@@ -22,6 +22,10 @@
         </picture>
         <div class="opening__clothes --collect" id="script__openingCollectBox"></div>
         <div class="opening__clothes --create" id="script__openingCreateBox"></div>
+        <div class="skip-button">
+            <span class="skip-button__text --pc">click on a screen to skip</span>
+            <span class="skip-button__text --sp">tap on a screen to skip</span>
+        </div>
     </section>
     <section class="conveyer" id="script-conveyerParent">
         <div class="conveyer-ui">
@@ -33,19 +37,19 @@
                 </picture>
                 <div class="conveyer-ui__logo-icons" id ="script-logoContainer">
                     <div class="conveyer-ui__logo-icons-item --wear">
-                        <img class="conveyer-ui__logo-img" src="./assets/images/logo/wear.svg">
+                        <img class="conveyer-ui__logo-icons-img" src="./assets/images/logo/wear.svg">
                         <p class="conveyer-ui__logo-icons-text">着る</p>
                     </div>
                     <div class="conveyer-ui__logo-icons-item --collect">
-                        <img class="conveyer-ui__logo-img" src="./assets/images/logo/bee.png">
+                        <img class="conveyer-ui__logo-icons-img" src="./assets/images/logo/bee.png">
                         <p class="conveyer-ui__logo-icons-text">服を回収する</p>
                     </div>
                     <div class="conveyer-ui__logo-icons-item --recycle">
-                        <img class="conveyer-ui__logo-img" src="./assets/images/logo/recycle.svg">
+                        <img class="conveyer-ui__logo-icons-img" src="./assets/images/logo/recycle.svg">
                         <p class="conveyer-ui__logo-icons-text">リサイクル</p>
                     </div>
                     <div class="conveyer-ui__logo-icons-item --create">
-                        <img class="conveyer-ui__logo-img" src="./assets/images/logo/create.svg">
+                        <img class="conveyer-ui__logo-icons-img" src="./assets/images/logo/create.svg">
                         <p class="conveyer-ui__logo-icons-text">服を作る</p>
                     </div>
                 </div>
@@ -55,10 +59,10 @@
                 <path id="script-frameRight" stroke="black" stroke-width="5" fill="none" stroke-dashoffset="0"></path>
                 <path id="script-firstTextPath" stroke="transparent" fill="transparent"></path>
                 <path id="script-lastTextPath" stroke="transparent" fill="transparent"></path>
-                <text id="script-firstTextText" font-size="60" font-family="Arial" fill="black" writing-mode="vertical-rl">
+                <text class="conveyer-ui__frame-text --first" id="script-firstTextText"  fill="black" writing-mode="vertical-rl">
                     <textPath id="script-firstTextTextPath" href="#script-firstTextPath">あらゆるものを循環させる</textPath>
                 </text>
-                <text id="script-lastTextText" font-size="60" font-family="Arial" fill="black">
+                <text  class="conveyer-ui__frame-text --second" id="script-lastTextText" fill="black">
                     <textPath id="script-lastTextTextPath" href="#script-lastTextPath">We circulate our world</textPath>
                 </text>
             </svg>
@@ -67,41 +71,45 @@
             <div class="conveyer-3d__clothes" id="script-conveyerFlow">
             </div>
         </div>
+        <div class="skip-button">
+            <span class="skip-button__text --pc">click on a screen to skip</span>
+            <span class="skip-button__text --sp">tap on a screen to skip</span>
+        </div>
     </section> 
-    <section class="static">
+    <section id="script-staticParent" class="static">
         <div class="static-cards--position">
-            <div class="static-cards--container">
-                <div class="static-cards__item">
+            <div class="static-cards--container" id = "script__staticCardBox">
+                <a class="static-cards__item">
                     <div class="static-cards__img-container">
                         <img class="static-cards__img-item" src="./assets/images/static/park.png">
                     </div>
                     <p class="static-cards__text">企業情報</p>
-                </div>
-                <div class="static-cards__item">
+                </a>
+                <a class="static-cards__item"">
                     <div class="static-cards__img-container">
                         <img class="static-cards__img-item" src="./assets/images/static/trash.png">
                     </div>
                     <p class="static-cards__text">事業領域</p>
-                </div>
-                <div class="static-cards__item">
+                </a>
+                <a class="static-cards__item --choose" href="テクノロジー">
                     <div class="static-cards__img-container">
                         <img class="static-cards__img-item" src="./assets/images/static/glass.png">
                     </div>
                     <p class="static-cards__text">テクノロジー</p>
-                </div>
-                <div class="static-cards__item">
+                </a>
+                <a class="static-cards__item">
                     <div class="static-cards__img-container">
                         <img class="static-cards__img-item" src="./assets/images/static/leaf.png">
                     </div>
                     <p class="static-cards__text">サステナビリティ</p>
-                </div>
+                </a>
             </div>
         </div>
         <div class="static__message --large">
             <p class="static__message-text">服から服をつくる</p>
         </div>
         <div class="static__message">
-            <p class="static__message-text">CLOTHS to CLOTHS</p>
+            <p class="static__message-text">CLOTHES to CLOTHES</p>
         </div>
     </section>
 </body>

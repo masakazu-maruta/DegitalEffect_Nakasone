@@ -122,7 +122,7 @@ body {
 .opening__clothes-item.--paper {
   width: 10px;
   height: 10px;
-  border: 1px solid black;
+  border: 0.01px solid black;
   border-radius: 25%;
   z-index: 20;
 }
@@ -146,8 +146,8 @@ body {
 }
 .conveyer-ui__logo {
   position: relative;
-  width: 760px;
-  height: 760px;
+  width: 100px;
+  height: 0px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -177,21 +177,21 @@ body {
   position: absolute;
 }
 .conveyer-ui__logo-icons-item.--wear {
-  width: 90px;
+  width: 100px;
 }
 .conveyer-ui__logo-icons-item.--collect {
-  width: 180px;
+  width: 200px;
 }
 .conveyer-ui__logo-icons-item.--recycle {
-  width: 90px;
+  width: 100px;
 }
 .conveyer-ui__logo-icons-item.--create {
-  width: 90px;
+  width: 100px;
 }
 .conveyer-ui__logo-icons-img {
   width: 100%;
   height: 100%;
-  margin-bottom: 0.64rem;
+  margin-bottom: 1rem;
   -o-object-fit: contain;
      object-fit: contain;
 }
@@ -202,7 +202,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 1.6em;
+  font-size: 1.8em;
   line-height: 1.4;
   letter-spacing: 0.14em;
   font-weight: 700;
@@ -212,7 +212,7 @@ body {
 }
 .conveyer-ui__logo-icons-arrow {
   position: absolute;
-  width: 190px;
+  width: 200px;
   height: auto;
 }
 .conveyer-ui__logo-background {
@@ -225,9 +225,6 @@ body {
   filter: blur(20px);
   z-index: -10;
 }
-.conveyer-ui__logo-text {
-  width: 240px;
-}
 .conveyer-ui__frame {
   position: absolute;
   height: 100%;
@@ -235,13 +232,12 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 20;
 }
 .conveyer-ui__frame-text {
-  font-size: 52px;
+  font-size: 53px;
   font-weight: 700;
   line-height: 1.33;
-  letter-spacing: 0.21em;
+  letter-spacing: 0.14em;
 }
 
 .conveyer-3d {
@@ -261,6 +257,7 @@ body {
   position: relative;
   transform-style: preserve-3d;
   width: 60%;
+  height: 100%;
   height: 350%;
   transform: rotateX(70deg) rotateZ(20deg);
   border: 5px solid black;
@@ -313,10 +310,10 @@ body {
   background-color: rgba(147, 147, 147, 0.5019607843);
   text-wrap: nowrap;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 .static__message.--large {
-  bottom: 128px;
+  bottom: 120px;
 }
 .static__message.--large .static__message-text {
   font-size: 100px;
@@ -335,6 +332,7 @@ body {
   line-height: 1.33;
   font-weight: 700;
   letter-spacing: 0.14em;
+  vertical-align: center;
   margin: 0;
 }
 
@@ -518,14 +516,14 @@ body {
     height: 4px;
   }
   .conveyer-ui__logo {
-    height: 280px;
-    width: 280px;
+    width: 260px;
+    height: 260px;
   }
   .conveyer-ui__logo-icons-item.--wear {
     width: 35px;
   }
   .conveyer-ui__logo-icons-item.--collect {
-    width: 70px;
+    width: 80px;
   }
   .conveyer-ui__logo-icons-item.--recycle {
     width: 35px;
@@ -538,7 +536,7 @@ body {
     height: 100%;
     max-width: 100%;
     max-height: 100%;
-    margin-bottom: 0.32rem;
+    margin-bottom: 1rem;
     -o-object-fit: contain;
        object-fit: contain;
   }
@@ -552,11 +550,11 @@ body {
     filter: blur(10px);
   }
   .conveyer-ui__logo-text {
-    width: 90px;
+    width: 100px;
   }
   .conveyer-ui__frame-text {
     font-size: 1.8rem;
-    letter-spacing: 0.42em;
+    letter-spacing: 0.14em;
   }
   .conveyer-ui__frame-text.--second {
     letter-spacing: 0;

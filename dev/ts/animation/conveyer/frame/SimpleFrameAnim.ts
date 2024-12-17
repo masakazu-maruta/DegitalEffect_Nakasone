@@ -5,6 +5,8 @@ import FrameAssetManager from "./FrameAssetManager";
 const SVG_URL = "http://www.w3.org/2000/svg";
 export default class SimpleFrameAnim implements IFrameAnim {
   private manager: FrameAssetManager;
+  private offsetX = 0.03;
+  private offsetY = 0.03;
   constructor() {
     this.manager = FrameAssetManager.getInstance();
   }
@@ -29,46 +31,22 @@ export default class SimpleFrameAnim implements IFrameAnim {
   };
   public optimizeLeftFrame = () => {
     this.manager.leftFramePath.setAttribute("strokeDashoffset", `${this.getPathLineLength()}`);
-    this.manager.leftFramePath.setAttribute(
-      "d",
-      `M ${this.ratio2ViewPortWidth(0.05)} 0 V ${this.ratio2ViewPortHeight(0.95)} H ${this.getPathWidth()}`
-    );
-    this.manager.leftFramePath.setAttribute(
-      "stroke-dasharray",
-      `${this.getPathLineLength()},${this.ratio2ViewPortHeight(0.95) + this.getPathWidth()}`
-    );
+    this.manager.leftFramePath.setAttribute("d", `M ${this.ratio2ViewPortWidth(this.offsetX)} 0 V ${this.ratio2ViewPortHeight(1 - this.offsetY)} H ${this.getPathWidth()}`);
+    this.manager.leftFramePath.setAttribute("stroke-dasharray", `${this.getPathLineLength()},${this.ratio2ViewPortHeight(1 - this.offsetY) + this.getPathWidth()}`);
     this.manager.leftFramePath.setAttribute("stroke-dashoffset", `${this.getPathLineLength()}`);
     document.addEventListener("resize", () => {
-      this.manager.leftFramePath.setAttribute(
-        "d",
-        `M ${this.ratio2ViewPortWidth(0.05)} 0 V ${this.ratio2ViewPortHeight(0.95)} H ${this.getPathWidth()}`
-      );
-      this.manager.leftFramePath.setAttribute(
-        "stroke-dasharray",
-        `${this.getPathLineLength()},${this.ratio2ViewPortHeight(0.95) + this.getPathWidth()}`
-      );
+      this.manager.leftFramePath.setAttribute("d", `M ${this.ratio2ViewPortWidth(this.offsetX)} 0 V ${this.ratio2ViewPortHeight(1 - this.offsetY)} H ${this.getPathWidth()}`);
+      this.manager.leftFramePath.setAttribute("stroke-dasharray", `${this.getPathLineLength()},${this.ratio2ViewPortHeight(1 - this.offsetY) + this.getPathWidth()}`);
       this.manager.leftFramePath.setAttribute("stroke-dashoffset", `${this.getPathLineLength()}`);
     });
   };
   public optimizeRightFrame = () => {
-    this.manager.rightFramePath.setAttribute(
-      "d",
-      `M ${this.ratio2ViewPortWidth(0.95)} ${this.getPathHeight()} V ${this.ratio2ViewPortHeight(0.05)} H ${this.ratio2ViewPortWidth(0.95) - this.getPathWidth()}`
-    );
-    this.manager.rightFramePath.setAttribute(
-      "stroke-dasharray",
-      `${this.getPathLineLength()},${this.ratio2ViewPortHeight(0.95) + this.getPathWidth()}`
-    );
+    this.manager.rightFramePath.setAttribute("d", `M ${this.ratio2ViewPortWidth(1 - this.offsetX)} ${this.getPathHeight()} V ${this.ratio2ViewPortHeight(this.offsetX)} H ${this.ratio2ViewPortWidth(1 - this.offsetY) - this.getPathWidth()}`);
+    this.manager.rightFramePath.setAttribute("stroke-dasharray", `${this.getPathLineLength()},${this.ratio2ViewPortHeight(1 - this.offsetY) + this.getPathWidth()}`);
     this.manager.rightFramePath.setAttribute("stroke-dashoffset", `${this.getPathLineLength()}`);
     document.addEventListener("resize", () => {
-      this.manager.rightFramePath.setAttribute(
-        "d",
-        `M ${this.ratio2ViewPortWidth(0.95)} ${this.getPathHeight()} V ${this.ratio2ViewPortHeight(0.05)} H ${this.ratio2ViewPortWidth(0.95) - this.getPathWidth()}`
-      );
-      this.manager.rightFramePath.setAttribute(
-        "stroke-dasharray",
-        `${this.getPathLineLength()},${this.ratio2ViewPortHeight(0.95) + this.getPathWidth()}`
-      );
+      this.manager.rightFramePath.setAttribute("d", `M ${this.ratio2ViewPortWidth(1 - this.offsetY)} ${this.getPathHeight()} V ${this.ratio2ViewPortHeight(this.offsetX)} H ${this.ratio2ViewPortWidth(1 - this.offsetY) - this.getPathWidth()}`);
+      this.manager.rightFramePath.setAttribute("stroke-dasharray", `${this.getPathLineLength()},${this.ratio2ViewPortHeight(1 - this.offsetY) + this.getPathWidth()}`);
       this.manager.rightFramePath.setAttribute("stroke-dashoffset", `${this.getPathLineLength()}`);
     });
   };
@@ -112,15 +90,10 @@ export default class SimpleFrameAnim implements IFrameAnim {
         const textWidth = bBox.height;
         const textHeight = bBox.width;
         const secondTextWidth = this.manager.lastTitleText.getBBox().width;
-        this.manager.firstTitlePath.setAttribute(
-          "d",
-          `M ${this.ratio2ViewPortWidth(0.09)} ${-textWidth - secondTextWidth} V ${this.ratio2ViewPortHeight(0.93) - textHeight}`
-        );
+        const secondTextHeight = this.manager.lastTitleText.getBBox().height;
+        this.manager.firstTitlePath.setAttribute("d", `M ${this.ratio2ViewPortWidth(this.offsetX) + textHeight / 1.5} ${-textWidth - secondTextWidth} V ${this.ratio2ViewPortHeight(1 - this.offsetY) - secondTextHeight}`);
         document.addEventListener("resize", () => {
-          this.manager.firstTitlePath.setAttribute(
-            "d",
-            `M ${this.ratio2ViewPortWidth(0.07)} ${-textWidth - secondTextWidth} V ${this.ratio2ViewPortHeight(0.93) - textHeight}`
-          );
+          this.manager.firstTitlePath.setAttribute("d", `M ${this.ratio2ViewPortWidth(this.offsetX) + textHeight / 1.5} ${-textWidth - secondTextWidth} V ${this.ratio2ViewPortHeight(1 - this.offsetY) - secondTextHeight}`);
         });
         gsap.fromTo(
           this.manager.firstTitleTextPath,
@@ -128,7 +101,7 @@ export default class SimpleFrameAnim implements IFrameAnim {
             attr: { startOffset: 0 }, // アニメーション終了時に開始位置を0に設定
           },
           {
-            attr: { startOffset: this.ratio2ViewPortHeight(0.93) - textHeight + secondTextWidth }, // パスの長さに基づいて開始位置を設定
+            attr: { startOffset: this.ratio2ViewPortHeight(1 - this.offsetY) - textHeight + secondTextWidth }, // パスの長さに基づいて開始位置を設定
             duration: duration, // アニメーションの持続時間
             onComplete: () => {
               resolve();
@@ -143,15 +116,12 @@ export default class SimpleFrameAnim implements IFrameAnim {
       setTimeout(() => {
         const bBox = this.manager.lastTitleText.getBBox();
         const textWidth = bBox.width;
-        this.manager.lastTitlePath.setAttribute(
-          "d",
-          `M ${this.ratio2ViewPortWidth(0.07)} ${-textWidth} V ${this.ratio2ViewPortHeight(0.93)} h ${textWidth}`
-        );
+        const textHeight = bBox.height;
+        const firstBBox = this.manager.firstTitleText.getBBox();
+        const firstTextHeight = firstBBox.width;
+        this.manager.lastTitlePath.setAttribute("d", `M ${this.ratio2ViewPortWidth(this.offsetX) + firstTextHeight / 3.2} ${-textWidth} V ${this.ratio2ViewPortHeight(1 - this.offsetY - 0.02)} h ${textWidth}`);
         document.addEventListener("resize", () => {
-          this.manager.lastTitlePath.setAttribute(
-            "d",
-            `M ${this.ratio2ViewPortWidth(0.07)} ${-textWidth} V ${this.ratio2ViewPortHeight(0.93)} h ${textWidth}`
-          );
+          this.manager.lastTitlePath.setAttribute("d", `M ${this.ratio2ViewPortWidth(this.offsetX) + firstTextHeight / 3.2} ${-textWidth} V ${this.ratio2ViewPortHeight(1 - this.offsetY - 0.02)} h ${textWidth}`);
         });
         gsap.fromTo(
           this.manager.lastTitleTextPath,
@@ -159,7 +129,7 @@ export default class SimpleFrameAnim implements IFrameAnim {
             attr: { startOffset: 0 }, // アニメーション終了時に開始位置を0に設定
           },
           {
-            attr: { startOffset: this.ratio2ViewPortHeight(0.93) + textWidth }, // パスの長さに基づいて開始位置を設定
+            attr: { startOffset: this.ratio2ViewPortHeight(1 - this.offsetY - 0.02) + textWidth }, // パスの長さに基づいて開始位置を設定
             duration: duration, // アニメーションの持続時間
             onComplete: () => {
               resolve();
