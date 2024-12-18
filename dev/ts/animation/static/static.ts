@@ -1,5 +1,6 @@
 import InfinityRotation from "./rotation/InfinityRotation";
 import Rotation from "./rotation/Rotation";
+import StaticAssetManager from "./StaticAssetManager";
 import ISwipe from "./swipe/ISwipe";
 import SingleSwipe from "./swipe/SingleSwipe";
 import ITap from "./tap/ITap";
@@ -24,7 +25,12 @@ export default class staticAnim {
     this.rotation.angleChange(this.rotation.getAngle());
     this.rotation.updateStyle();
   };
-  public reset = () => {
-    this.rotation.resetStyle();
+  public pcReset = () => {
+    StaticAssetManager.getInstance().pcInitCards();
+    this.swipe.reset();
+    this.tap.reset();
+  };
+  public spReset = () => {
+    StaticAssetManager.getInstance().pcInitCards();
   };
 }

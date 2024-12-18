@@ -2,16 +2,18 @@ import { GlobalViewportManager } from "../../../../util/GlobalViewportManager";
 import IOpeningExpandAnimator from "./IOpeningExpandAnimator";
 import gsap from "gsap";
 
-export default class OutsideOpeningExpandAnimator implements IOpeningExpandAnimator {
+export default class DividedOpeningExpandAnimator implements IOpeningExpandAnimator {
+  private currentIndex = 0;
+  private row = 6;
+  private column = 6;
   public expand = async (htmlElement: HTMLElement, duration: number, index: number): Promise<void> => {
-    const newScale = 4;
+    const newScale = 5;
     const tl = gsap.timeline();
-
     // Promiseを作成し、アニメーションの完了時にresolveする
     return new Promise<void>((resolve) => {
-      const positionArray = this.randomPosition();
-      const x = positionArray[0];
-      const y = positionArray[1];
+      const maxX = GlobalViewportManager.getViewPortWidth() * 1.5;
+      const maxY = GlobalViewportManager.getViewPortHeight() * 1.5;
+      const position = this.setPosition(maxX, maxY, index);
       const startRotation = Math.random() * 180;
       const goalRotation = startRotation + (Math.random() * 45 - 90);
       tl.fromTo(
@@ -20,8 +22,8 @@ export default class OutsideOpeningExpandAnimator implements IOpeningExpandAnima
         {
           scale: newScale,
           duration: duration,
-          x: `${x}px`,
-          y: `${y}px`,
+          x: `${position[0]}px`,
+          y: `${position[1]}px`,
           rotation: goalRotation,
           ease: "power2.out",
           onComplete: () => {
@@ -32,20 +34,17 @@ export default class OutsideOpeningExpandAnimator implements IOpeningExpandAnima
     });
   };
 
-  private randomPosition = (): number[] => {
-    const isXSide = Math.random() > 0.5 ? true : false;
-    const maxX = GlobalViewportManager.getViewPortWidth() * 2;
-    const maxY = GlobalViewportManager.getViewPortHeight() * 2;
+  setPosition = (maxX: number, maxY: number, index: number): number[] => {
+    index = index % (this.row * this.column);
+    const xIndex = index % this.column;
+    const yIndex = Math.floor(index / this.column);
+    const xBlockSize = maxX / this.column;
+    const yBlockSize = maxY / this.row;
+    const range = 0.1;
+    const xPosition = Math.random() * xBlockSize * range + xBlockSize * xIndex + xBlockSize / 2 - xBlockSize * (range / 2);
+    const yPosition = Math.random() * yBlockSize * range + yBlockSize * yIndex + yBlockSize / 2 - yBlockSize * (range / 2);
     const offsetX = (GlobalViewportManager.getViewPortWidth() - maxX) / 2;
     const offsetY = (GlobalViewportManager.getViewPortHeight() - maxY) / 2;
-    const sideMag = isXSide ? maxX : maxY;
-    const randomMag = isXSide ? maxY : maxX;
-    const sidePosition = Math.random() > 0.5 ? Math.random() * 0.3 * sideMag : (Math.random() * 0.3 + 0.7) * sideMag;
-    const randomPosition = Math.random() * randomMag;
-    if (isXSide) {
-      return [sidePosition + offsetX, randomPosition + offsetY];
-    } else {
-      return [randomPosition + offsetX, sidePosition + offsetY];
-    }
+    return [xPosition + offsetX, yPosition + offsetY];
   };
 }

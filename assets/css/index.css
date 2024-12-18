@@ -308,7 +308,7 @@ body {
 .static__message {
   position: absolute;
   left: 0;
-  bottom: 24px;
+  bottom: 20px;
   padding: 0px 64px;
   background-color: rgba(147, 147, 147, 0.5019607843);
   text-wrap: nowrap;
@@ -316,14 +316,16 @@ body {
   align-items: flex-end;
 }
 .static__message.--large {
-  bottom: 128px;
+  bottom: 120px;
 }
 .static__message.--large .static__message-text {
+  padding-top: 24px;
   font-size: 100px;
 }
 .static__message ::after {
   content: "";
   position: absolute;
+  top: 0px;
   left: calc(100% + 20px);
   width: 22px;
   height: 100%;
@@ -332,9 +334,11 @@ body {
 .static__message-text {
   color: white;
   font-size: 65px;
-  line-height: 1.33;
+  line-height: 1.2;
   font-weight: 700;
   letter-spacing: 0.14em;
+  vertical-align: bottom;
+  padding-top: 8px;
   margin: 0;
 }
 
@@ -383,6 +387,7 @@ body {
   transition: background-color 0.25s ease;
 }
 .static-cards__item:hover {
+  cursor: pointer;
   flex-basis: 650px;
 }
 .static-cards__item:hover::after {
@@ -562,7 +567,7 @@ body {
     letter-spacing: 0;
   }
   .conveyer-ui #script-frameLeft,
-  .conveyer-ui #script-frameRight {
+.conveyer-ui #script-frameRight {
     stroke-width: 1.8;
   }
   .conveyer-3d {
@@ -592,23 +597,24 @@ body {
     height: 40px;
   }
   .static__message {
-    bottom: 24px;
+    bottom: 16px;
     padding: 0px 18px;
     line-height: 1.6;
   }
   .static__message.--large {
-    bottom: 64px;
+    bottom: 52px;
   }
   .static__message.--large .static__message-text {
     font-size: 32px;
+    padding-top: 8px;
   }
   .static__message ::after {
     left: calc(100% + 8px);
     width: 16px;
   }
   .static__message-text {
-    color: white;
     font-size: 20px;
+    padding-top: 4px;
   }
   .static-cards--position {
     position: absolute;
@@ -666,6 +672,14 @@ body {
     left: -14px;
     top: 14px;
     filter: blur(8px);
+  }
+  @-webkit-keyframes rotationCards {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(360deg);
+    }
   }
   @keyframes rotationCards {
     from {

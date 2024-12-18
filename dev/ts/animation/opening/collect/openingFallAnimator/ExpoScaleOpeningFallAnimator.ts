@@ -13,12 +13,17 @@ export default class ExpoScaleOpeningFallAnimator implements IOpeningFallAnimato
     }
     gsap.killTweensOf(htmlElement);
     const newScale = 0.5;
-    const _startX = Math.random() * 80 + 10;
+    let mag = 60;
+    if (GlobalViewportManager.getViewPortWidth() < 900) {
+      mag = 110;
+    }
+    const _startX = Math.random() * mag + (100 - mag) / 2;
     const _startY = -10;
     const startX = (_startX / 100) * GlobalViewportManager.getViewPortWidth();
     const startY = (_startY / 100) * GlobalViewportManager.getViewPortHeight();
     const goalX =
-      (ExpoScaleOpeningFallAnimator.goalElementRect.right + ExpoScaleOpeningFallAnimator.goalElementRect.left) / 2 - 50;
+      (ExpoScaleOpeningFallAnimator.goalElementRect.right + ExpoScaleOpeningFallAnimator.goalElementRect.left) / 2 -
+      Math.random() * GlobalViewportManager.getViewPortWidth() * 0.025;
     const goalY = ExpoScaleOpeningFallAnimator.goalElementRect.top + htmlElement.getBoundingClientRect().height;
     const angle = this.calculateAngle(startX, startY, goalX, goalY);
     return new Promise<void>((resolve) => {
@@ -42,6 +47,8 @@ export default class ExpoScaleOpeningFallAnimator implements IOpeningFallAnimato
   public calculateAngle = (x1: number, y1: number, x2: number, y2: number) => {
     const rad = Math.atan2(y2 - y1, x2 - x1);
     const deg = (180 * rad) / Math.PI;
-    return (deg - 90) / 1.5;
+    const returnDeg = (deg - 90) / 1.5;
+    const offsetDeg = Math.random() * 20 - 10;
+    return returnDeg + offsetDeg;
   };
 }
