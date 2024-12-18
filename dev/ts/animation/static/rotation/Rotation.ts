@@ -66,7 +66,7 @@ export default class Rotation {
     this.manager.cards.forEach((element, index) => {
       if (index === styledIndex) {
         element.classList.add("--choose");
-        element.setAttribute("href", "/aaa");
+        element.setAttribute("href", this.manager.cardHrefs[index]);
       } else {
         element.classList.remove("--choose");
         element.removeAttribute("href");
@@ -91,12 +91,5 @@ export default class Rotation {
   };
   public getBusy = (): boolean => {
     return this.busy;
-  };
-  public resetStyle = () => {
-    this.manager.cards.forEach((element) => {
-      element.style.transform = "";
-      element.classList.remove("--choose");
-      element.removeAttribute("href");
-    });
   };
 }

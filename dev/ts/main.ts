@@ -13,19 +13,21 @@ const minMediaQuery = window.matchMedia("(min-width: 900px)");
 document.addEventListener("DOMContentLoaded", () => {
   pcAnimation();
   if (maxMediaQuery.matches) {
+    staticAnimator.spReset();
     spAnimation();
   }
   if (minMediaQuery.matches) {
-    staticAnimator.reset();
+    staticAnimator.pcReset();
   }
   maxMediaQuery.addEventListener("change", (e) => {
     if (maxMediaQuery.matches) {
+      staticAnimator.spReset();
       spAnimation();
     }
   });
   minMediaQuery.addEventListener("change", (e) => {
     if (minMediaQuery.matches) {
-      staticAnimator.reset();
+      staticAnimator.pcReset();
     }
   });
 });
@@ -36,10 +38,10 @@ const pcAnimation = async () => {
   const containerManager: ContainerAssetManager = ContainerAssetManager.getInstance();
   const openingAnimator: OpeningAnimator = new OpeningAnimator();
   const conveyerAnimator: ConveyerAnimator = new ConveyerAnimator();
-  await makeClickToCompleteTask(openingAnimator.startAnim, 5000);
+  await makeClickToCompleteTask(openingAnimator.startAnim, 0);
   await fadeOut(containerManager.openingContainer);
   await fadeIn(containerManager.conveyerContainer);
-  await makeClickToCompleteTask(conveyerAnimator.startAnim, 10000000);
+  await makeClickToCompleteTask(conveyerAnimator.startAnim, 3000);
   await fadeOut(containerManager.conveyerContainer);
   await fadeIn(containerManager.staticContainer);
 };

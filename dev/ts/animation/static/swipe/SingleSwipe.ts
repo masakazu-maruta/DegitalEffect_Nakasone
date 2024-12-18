@@ -3,6 +3,11 @@ import Rotation from "../rotation/Rotation";
 import StaticAssetManager from "../StaticAssetManager";
 import ISwipe from "./ISwipe";
 
+interface Event {
+  name: string;
+  target: HTMLElement | Window;
+  action: (...e) => void;
+}
 export default class SingleSwipe implements ISwipe {
   private manager: StaticAssetManager;
   private rotation: Rotation;
@@ -10,28 +15,42 @@ export default class SingleSwipe implements ISwipe {
   private endX: number = 0;
   private minimumDistance = 100;
   private swipeAnimationTime = 0.25;
+  private eventListeners: Event[] = [];
 
   constructor(rotation: Rotation) {
     this.manager = StaticAssetManager.getInstance();
     this.rotation = rotation;
     this.rotation.angleChange(0);
-    window.addEventListener("touchstart", (e) => {
+  }
+  swipe: () => void = () => {
+    const startHandle = (e) => {
       if (this.rotation.getBusy()) return;
       // e.preventDefault();
       this.touchStart(e);
-    });
-    window.addEventListener("touchmove", (e) => {
+    };
+    const moveHandle = (e) => {
       if (this.rotation.getBusy()) return;
       // e.preventDefault();
       this.touchMove(e);
-    });
-    window.addEventListener("touchend", (e) => {
+    };
+
+    const endHandle = (e) => {
       if (this.rotation.getBusy()) return;
       // e.preventDefault();
       this.touchEnd(e);
+    };
+    window.addEventListener("touchstart", startHandle);
+    window.addEventListener("touchmove", moveHandle);
+    window.addEventListener("touchend", endHandle);
+    this.eventListeners.push({ name: "touchstart", target: window, action: startHandle });
+    this.eventListeners.push({ name: "touchmove", target: window, action: moveHandle });
+    this.eventListeners.push({ name: "touchend", target: window, action: endHandle });
+  };
+  reset: () => void = () => {
+    this.eventListeners.forEach((event, index) => {
+      event.target.removeEventListener(event.name, event.action);
     });
-  }
-  swipe: () => void = () => {};
+  };
 
   private touchStart = (e: TouchEvent) => {
     this.startX = e.touches[0].pageX;
