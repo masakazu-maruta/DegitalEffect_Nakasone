@@ -5,6 +5,7 @@ export default class StaticAssetManager {
   public readonly container: HTMLElement;
   public readonly cards: HTMLElement[] = [];
   public readonly cardHrefs: string[] = [];
+  public readonly swipeUI: HTMLElement;
   private constructor() {
     const i = GlobalFunction.getInstance();
     this.container = i.getElementByCheckedId("script__staticCardBox");
@@ -13,6 +14,7 @@ export default class StaticAssetManager {
       this.cards.push(element);
       this.cardHrefs.push(element.getAttribute("href") || "");
     });
+    this.swipeUI = i.getElementByCheckedId("script__staticFlickImg");
   }
 
   public static getInstance = (): StaticAssetManager => {

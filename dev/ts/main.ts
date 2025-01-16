@@ -10,8 +10,8 @@ import { GlobalViewportManager } from "./util/GlobalViewportManager";
 
 const maxMediaQuery = window.matchMedia("(max-width: 899px)");
 const minMediaQuery = window.matchMedia("(min-width: 900px)");
-document.addEventListener("DOMContentLoaded", () => {
-  pcAnimation();
+document.addEventListener("DOMContentLoaded", async () => {
+  await pcAnimation();
   if (maxMediaQuery.matches) {
     staticAnimator.spReset();
     spAnimation();

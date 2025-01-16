@@ -1,11 +1,10 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap");
 html,
 body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  font-family: "Amiko", Arial;
+  font-family: "IBM Plex Sans", "Noto Sans JP", serif;
   font-weight: 400;
   font-style: normal;
   width: 100%;
@@ -51,8 +50,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   z-index: 100;
 }
 .opening__background {
@@ -131,8 +130,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   z-index: 0;
   background-color: white;
   opacity: 0;
@@ -299,8 +298,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background-image: url("../images/static/wireBackground.png");
   z-index: -100;
   opacity: 0;
@@ -308,8 +307,8 @@ body {
 .static__message {
   position: absolute;
   left: 0;
-  bottom: 20px;
   padding: 0px 64px;
+  bottom: 20px;
   background-color: rgba(147, 147, 147, 0.5019607843);
   text-wrap: nowrap;
   display: flex;
@@ -319,8 +318,7 @@ body {
   bottom: 120px;
 }
 .static__message.--large .static__message-text {
-  padding-top: 24px;
-  font-size: 100px;
+  font-size: 88px;
 }
 .static__message ::after {
   content: "";
@@ -333,13 +331,15 @@ body {
 }
 .static__message-text {
   color: white;
-  font-size: 65px;
-  line-height: 1.2;
+  font-size: 64px;
+  line-height: 1.4;
   font-weight: 700;
   letter-spacing: 0.14em;
   vertical-align: bottom;
-  padding-top: 8px;
   margin: 0;
+}
+.static__flick {
+  display: none;
 }
 
 .static-cards--position {
@@ -597,24 +597,53 @@ body {
     height: 40px;
   }
   .static__message {
-    bottom: 16px;
-    padding: 0px 18px;
-    line-height: 1.6;
+    bottom: 4vh;
+    padding: 2px 10px;
   }
   .static__message.--large {
-    bottom: 52px;
+    bottom: calc(4vh + 10vw);
   }
   .static__message.--large .static__message-text {
-    font-size: 32px;
-    padding-top: 8px;
+    font-size: 6.4vw;
   }
   .static__message ::after {
     left: calc(100% + 8px);
-    width: 16px;
+    width: 8px;
   }
   .static__message-text {
-    font-size: 20px;
-    padding-top: 4px;
+    font-size: 5.6vw;
+  }
+  .static__flick {
+    display: inline-block;
+    width: 240px;
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    opacity: 0; /* 初期状態は完全に透明 */
+    transition: opacity 0.5s ease-in-out;
+  }
+  .static__flick.--animation {
+    opacity: 1;
+    -webkit-animation: flickAnimation 1s 1s ease-out infinite alternate;
+            animation: flickAnimation 1s 1s ease-out infinite alternate;
+  }
+  @-webkit-keyframes flickAnimation {
+    from {
+      filter: opacity(1);
+    }
+    to {
+      filter: opacity(0.5);
+    }
+  }
+  @keyframes flickAnimation {
+    from {
+      filter: opacity(1);
+    }
+    to {
+      filter: opacity(0.5);
+    }
   }
   .static-cards--position {
     position: absolute;

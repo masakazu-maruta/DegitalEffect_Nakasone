@@ -12,6 +12,7 @@ export default class LinearTap implements ITap {
   private rotation: Rotation;
   private duration: number = 0.25;
   private eventListeners: Event[] = [];
+  private animationClassName: string = "--animation";
   constructor(rotation: Rotation) {
     this.rotation = rotation;
     this.manager = StaticAssetManager.getInstance();
@@ -32,6 +33,7 @@ export default class LinearTap implements ITap {
     this.manager.cards.forEach((element, index) => {
       const handleClick = async () => {
         this.tapEvent(index);
+        this.manager.swipeUI.classList.remove(this.animationClassName);
       };
       element.addEventListener("click", handleClick);
       this.eventListeners.push({ name: "click", target: element, action: handleClick });
